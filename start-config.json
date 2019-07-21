@@ -1,0 +1,17 @@
+{
+    "redis.host": "127.0.0.1",
+    "redis.prot": "6397",
+    "redis": {
+        "requirepass": "123456"
+    },
+    "testArr": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        {
+            "sss": 123
+        }
+    ]
+}
