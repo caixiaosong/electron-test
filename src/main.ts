@@ -2,7 +2,6 @@ import * as IORedis from "ioredis"
 class Main {
     public run(): void {
         console.log("main is runing !");
-        this.onTestIORedis();
     }
 
     private onTestIORedis() {
