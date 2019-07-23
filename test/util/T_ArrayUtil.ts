@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import { ArrayUtil } from "../../src/utils/array/ArrayUtil";
 
-describe("#ArrayUtil", () => {
+describe("ArrayUtil", () => {
   var arr: Array<number>;
 
   beforeEach(function () {
