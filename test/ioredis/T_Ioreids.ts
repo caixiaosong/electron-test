@@ -1,17 +1,17 @@
-import * as RDS from "ioredis";
 import { assert } from "chai";
+import * as RDS from "ioredis";
 
 
 describe("ioredis", function () {
-    var redis;
+    var redis: RDS.Redis;
     before(function () {
         redis = new RDS(6379, "127.0.0.1");
     })
 
-    it("get num", function () {
-        return redis.get("num").then(
+    it("get null num", function () {
+        return redis.get("any_null_key").then(
             function (value: string) {
-                assert.equal(value, "abc")
+                assert.equal(value, null)
             }
         )
     })
