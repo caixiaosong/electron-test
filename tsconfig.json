@@ -5,6 +5,13 @@
         "module": "commonjs",
         "sourceMap": true,
         "outDir": "out"
-
-    }
+    },
+    "include": [
+        "src/**/*.ts",
+        "test/**/*.ts",
+        "src/**/*.vue"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
 }
