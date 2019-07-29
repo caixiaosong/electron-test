@@ -1,8 +1,8 @@
-import * as FS from "fs";
+import * as FS from 'fs';
 import { JsonUtil } from './JsonUtil';
 export class JsonBootReader {
-    private _jsonConfigPath: string;
-    private _jsonObj: any = null;
+    private jsonConfigPath: string;
+    private jsonObj: any = null;
 
     public constructor() {
 
@@ -10,12 +10,12 @@ export class JsonBootReader {
 
     /**
      * 同步加载方式加载默认配置，
-     * @param jsonConfigPath 
+     * @param jsonConfigPath
      */
-    public loadDefaultConfig(jsonConfigPath: string = "start-config.json"): JsonBootReader {
-        this._jsonConfigPath = jsonConfigPath
-        var data: string = FS.readFileSync(this._jsonConfigPath, { encoding: "utf8" })
-        this._jsonObj = JsonUtil.toNormalJsonObj(JSON.parse(data))
+    public loadDefaultConfig(jsonConfigPath: string = 'start-config.json'): JsonBootReader {
+        this.jsonConfigPath = jsonConfigPath;
+        const data: string = FS.readFileSync(this.jsonConfigPath, { encoding: 'utf8' });
+        this.jsonObj = JsonUtil.toNormalJsonObj(JSON.parse(data));
         return this;
     }
 
@@ -24,13 +24,13 @@ export class JsonBootReader {
      * @param jsonConfigPath 玩家自定义配置路径
      */
     public mergeJson(jsonConfigPath: string): void {
-        if (this._jsonConfigPath == null || this._jsonObj == null) {
-            this.loadDefaultConfig(jsonConfigPath)
+        if (this.jsonConfigPath == null || this.jsonObj == null) {
+            this.loadDefaultConfig(jsonConfigPath);
             return;
         }
         try {
-            var jsonObjTmp: any = JsonUtil.loadJsonConfig(jsonConfigPath)
-            JsonUtil.mergeJson(this._jsonObj, jsonObjTmp)
+            const jsonObjTmp: any = JsonUtil.loadJsonConfig(jsonConfigPath);
+            JsonUtil.mergeJson(this.jsonObj, jsonObjTmp);
         } catch (e) {
 
         }
@@ -40,7 +40,7 @@ export class JsonBootReader {
      * json 的javascriptd对象
      */
     public getJson(): any {
-        return this._jsonObj;
+        return this.jsonObj;
     }
 
 }

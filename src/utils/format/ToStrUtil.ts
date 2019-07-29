@@ -1,20 +1,21 @@
 export class ToStrUtil {
 
     /**
-     * 
-     * @param obj 
+     *
+     * @param obj
      * @param sp 默认",\n"
      */
-    public static toStr(obj: object, sp = ",\n"): string {
-        var finalStr: string = "";
+    public static toStr(obj: object, sp = ',\n'): string {
+        let finalStr: string = '';
         if (obj instanceof Array) {
-            finalStr += "\nArray:\n[";
-            for (var key in obj) {
-                finalStr = finalStr + ToStrUtil.toStr(obj[key], ',')
+            finalStr += '\nArray:\n[';
+            // tslint:disable-next-line: forin
+            for (const key in obj) {
+                finalStr = finalStr + ToStrUtil.toStr(obj[key], ',');
             }
-            finalStr = ToStrUtil.tryRemoveLastSp(finalStr, ',') + "]";
+            finalStr = ToStrUtil.tryRemoveLastSp(finalStr, ',') + ']';
 
-        } else if (typeof obj == 'object') {
+        } else if (typeof obj === 'object') {
             finalStr = ToStrUtil.objToStr(obj, sp);
         } else {
             finalStr += obj + sp;
@@ -25,22 +26,23 @@ export class ToStrUtil {
 
     /**
      * 确定 obj的类型是object 可以直接使用这个,不然还是使用toStr
-     * @param obj 
-     * @param sp 
+     * @param obj
+     * @param sp
      */
-    public static objToStr(obj: object, sp = ",\n"): string {
-        var finalStr: string = "";
-        for (var key in obj) {
-            var objValue = obj[key];
-            var type: string = typeof objValue;
+    public static objToStr(obj: object, sp = ',\n'): string {
+        let finalStr: string = '';
+        // tslint:disable-next-line: forin
+        for (const key in obj) {
+            const objValue = obj[key];
+            const type: string = typeof objValue;
             if (objValue instanceof Array) {
-                var str: string = ToStrUtil.toStr(objValue, ',');
-                ToStrUtil.tryRemoveLastSp(str, ",")
-                finalStr += "\nArray:\n[" + str + "]\n";
-            } else if (type === "object") {
-                finalStr += `${key}:\n{\n${ToStrUtil.tryRemoveLastSp(ToStrUtil.toStr(objValue), ",")}\n}`;
+                const str: string = ToStrUtil.toStr(objValue, ',');
+                ToStrUtil.tryRemoveLastSp(str, ',');
+                finalStr += '\nArray:\n[' + str + ']\n';
+            } else if (type === 'object') {
+                finalStr += `${key}:\n{\n${ToStrUtil.tryRemoveLastSp(ToStrUtil.toStr(objValue), ',')}\n}`;
             } else {
-                finalStr += key + ":" + objValue + sp;
+                finalStr += key + ':' + objValue + sp;
             }
         }
         return finalStr;
@@ -53,7 +55,7 @@ export class ToStrUtil {
      */
     public static tryRemoveLastSp(str: string, sp: string, isJustRemoveOne: boolean = false): string {
         str = str.trim();
-        while (str.lastIndexOf(sp) == str.length - 1) {
+        while (str.lastIndexOf(sp) === str.length - 1) {
             str = str.substring(0, str.length - 1);
             if (isJustRemoveOne) {
                 break;

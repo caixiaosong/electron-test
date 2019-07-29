@@ -1,13 +1,14 @@
-import * as FS from "fs";
+import * as FS from 'fs';
 
 export class JsonUtil {
 
+
     /**
-    * 读取指定路径的json文件并返回一个json的结构obj对象
-    * @param configPath json路径
-    */
+     * 读取指定路径的json文件并返回一个json的结构obj对象
+     * @param configPath configPath json路径
+     */
     public static loadJsonConfig(configPath: string): any {
-        var data: string = FS.readFileSync(configPath, { encoding: "utf8" });
+        const data: string = FS.readFileSync(configPath, { encoding: 'utf8' });
         return JsonUtil.toNormalJsonObj(JSON.parse(data));
     }
 
@@ -17,14 +18,15 @@ export class JsonUtil {
      * @param destJson javascript的对象
      */
     public static mergeJson(beOverrideJson: any, destJson: any): void {
-        for (var key in destJson) {
-            var value: any = destJson[key];
-            var valType: string = typeof value;
-            if (valType === "object") {
+        // tslint:disable-next-line: forin
+        for (const key in destJson) {
+            const value: any = destJson[key];
+            const valType: string = typeof value;
+            if (valType === 'object') {
                 if (beOverrideJson[key] == null) {
-                    beOverrideJson[key] = value;//直接引用过去，而不是拷贝一份
+                    beOverrideJson[key] = value; // 直接引用过去，而不是拷贝一份
                 } else {
-                    JsonUtil.mergeJson(beOverrideJson[key], value)
+                    JsonUtil.mergeJson(beOverrideJson[key], value);
                 }
             } else {
                 if (destJson[key] !== beOverrideJson[key]) {
@@ -42,13 +44,14 @@ export class JsonUtil {
      * 解析：{redis:{host:"127.0.0.1"}}
      */
     public static toNormalJsonObj(inputJson: any): any {
-        var targetJson = {}
-        for (var key in inputJson) {
-            var keys: Array<string> = key.split(".");
-            var tmpObj: any = targetJson
-            for (var i: number = 0; i < keys.length; ++i) {
-                var keyTmp: string = keys[i]
-                if (i == keys.length - 1) {
+        const targetJson = {};
+        // tslint:disable-next-line: forin
+        for (const key in inputJson) {
+            const keys: string[] = key.split('.');
+            let tmpObj: any = targetJson;
+            for (let i: number = 0; i < keys.length; ++i) {
+                const keyTmp: string = keys[i];
+                if (i === keys.length - 1) {
                     JsonUtil.trySaveObj(tmpObj, keyTmp, inputJson[key]);
                 } else {
                     tmpObj[keyTmp] = tmpObj[keyTmp] || {};
@@ -59,22 +62,23 @@ export class JsonUtil {
         return targetJson;
     }
 
-    private static trySaveObj(destObj: object, key: string, value: string | Array<any> | object): void {
+    private static trySaveObj(destObj: object, key: string, value: string | any[] | object): void {
         const valType: string = typeof value;
-        if (valType !== "object") {
+        if (valType !== 'object') {
             destObj[key] = value;
         } else {
             if (value instanceof Array) {
                 destObj[key] = destObj[key] == null ? [] : destObj[key];
-                var destArr: Array<any> = destObj[key];
-                for (var keyTmp in value) {
-                    var valTmp: any
-                    if (typeof value[keyTmp] !== "object") {
+                const destArr: any[] = destObj[key];
+                // tslint:disable-next-line: forin
+                for (const keyTmp in value) {
+                    let valTmp: any;
+                    if (typeof value[keyTmp] !== 'object') {
                         valTmp = value[keyTmp];
                     } else {
-                        valTmp = JsonUtil.toNormalJsonObj(value[keyTmp])
+                        valTmp = JsonUtil.toNormalJsonObj(value[keyTmp]);
                     }
-                    destArr.push(valTmp)
+                    destArr.push(valTmp);
                 }
             } else {
                 destObj[key] = destObj[key] === null ?

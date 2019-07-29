@@ -10,14 +10,14 @@ import { BitCryptType, CryptBitArray, BitCryptRegister } from './BitCryptDefine'
  * 添加加解密类型,
  */
 export class BitCryptMgr {
-    public static readonly INSTANCE: BitCryptMgr = new BitCryptMgr()
-    private readonly CRYPT_MAP: Array<CryptBitArray> = []
+    public static readonly INSTANCE: BitCryptMgr = new BitCryptMgr();
+    private readonly CRYPT_MAP: CryptBitArray[] = new Array<CryptBitArray>();
 
     /**
      * 构造函数,注册所有加密类型
      */
     constructor() {
-        BitCryptRegister.regist(this.CRYPT_MAP)
+        BitCryptRegister.regist(this.CRYPT_MAP);
     }
 
     /**
@@ -25,13 +25,14 @@ export class BitCryptMgr {
      * @param needNum
      */
     public randCryptTypeArr(needNum: number): BitCryptType[] {
-        var cryptTypeArr: BitCryptType[] = [];
-        var cryptType: number;
-        for (var i: number = 0; i < needNum; ++i) {
-            cryptType = MathUtil.random(0, BitCryptMgr.INSTANCE.CRYPT_MAP.length)//依赖于BitCryptType.LENGTH的正确性
+        const cryptTypeArr: BitCryptType[] = [];
+        let cryptType: number;
+        for (let i: number = 0; i < needNum; ++i) {
+            // 依赖于BitCryptType.LENGTH的正确性
+            cryptType = MathUtil.random(0, BitCryptMgr.INSTANCE.CRYPT_MAP.length);
             cryptTypeArr.push(cryptType);
         }
-        return cryptTypeArr
+        return cryptTypeArr;
     }
 
 
@@ -44,10 +45,11 @@ export class BitCryptMgr {
      * @param cryptType 加密类型
      */
     public cryptValue(value: number, startIndex: number, endIndex: number, isEncrypt: boolean, cryptType: BitCryptType): number {
-        var bitArr: Array<number> = BitUtil.bitToArr(value, startIndex, endIndex)//转换成数组模式
-        this.CRYPT_MAP[cryptType].crypt(bitArr, isEncrypt)//加解密
-        var newValue: number = BitUtil.arrToBit(bitArr)
-        return BitUtil.clearBitsByIndexs(value, startIndex, endIndex) | (newValue << startIndex)
+        const bitArr: number[] = BitUtil.bitToArr(value, startIndex, endIndex); // 转换成数组模式
+        this.CRYPT_MAP[cryptType].crypt(bitArr, isEncrypt); // 加解密
+        const newValue: number = BitUtil.arrToBit(bitArr);
+        // tslint:disable-next-line: no-bitwise
+        return BitUtil.clearBitsByIndexs(value, startIndex, endIndex) | (newValue << startIndex);
     }
 
 }

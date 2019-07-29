@@ -6,7 +6,7 @@ export class MathUtil {
      * @param max 最大范围
      */
     public static random(min: number, max: number): number {
-        return min + Math.random() * (max - min)
+        return min + Math.random() * (max - min);
     }
 
 }

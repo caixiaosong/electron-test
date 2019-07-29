@@ -1,16 +1,9 @@
-import * as IORedis from "ioredis"
-class Main {
+import * as IORedis from 'ioredis';
+import { IRunable } from './ifaces/IComFaces';
+import { ElectronMain } from './ElectronMain';
+class Main implements IRunable {
     public run(): void {
-        console.log("main is runing !")
-        // this.onTestIORedis()
-    }
-
-    private onTestIORedis() {
-
-        var redis = new IORedis()
-        redis.get('num', function (err, res) {
-            console.log(err + ":" + res)
-        })
+        new ElectronMain().run();
     }
 }
 
