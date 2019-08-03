@@ -8,8 +8,8 @@
     },
     "include": [
         "src/**/*.ts",
-        "test/**/*.ts",
-        "src/**/*.vue"
+        "src/**/*.vue",
+        "test-free/*.ts"
     ],
     "exclude": [
         "node_modules"
