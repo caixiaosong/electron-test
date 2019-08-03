@@ -4,7 +4,7 @@ import * as RDS from 'ioredis';
 
 /**
  * edis 测试的需要开启redis后才能进行测试，所以这里采用skip过滤掉mocha的测试
- * */
+ */
 
 describe.skip('ioredis', function () {
     let redis: RDS.Redis = null;
