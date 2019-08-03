@@ -17,10 +17,10 @@ describe.skip('ioredis', function () {
             redis.disconnect();
         }
         redis = null;
-    })
+    });
 
 
-    it('get null num', async function (done: Function) {
+    it('get null num', async function () {
         try {
             const value = await redis.get('any_null_key');
             assert.equal(value, null);
