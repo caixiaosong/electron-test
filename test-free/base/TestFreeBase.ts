@@ -3,11 +3,11 @@ import * as colors from "colors";
 
 
 export class TestFreeBase implements ITestFreeBase {
-    public handle() {
+    public handle(): void {
         throw new Error("Method not implemented.");
     }
 
-    public run(isRun: boolean) {
+    public run(isRun: boolean): void {
         if (!isRun) {
             return;
         }
