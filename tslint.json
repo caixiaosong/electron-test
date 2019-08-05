@@ -29,6 +29,7 @@
     "trailing-comma": false,
     "only-arrow-functions": false,
     "space-before-function-paren": false,
-    "no-bitwise": false
+    "no-bitwise": false,
+    "member-ordering": false
   }
 }

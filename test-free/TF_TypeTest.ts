@@ -1,15 +1,14 @@
-import { IRunable } from "../src/ifaces/IComFaces";
-import * as colors from "colors"
-import { log, types } from "util";
+import * as colors from "colors";
+import { log } from "util";
+import { TestFreeBase } from "./base/TestFreeBase";
 
-export class TF_TypeTest implements IRunable {
+export class TF_TypeTest extends TestFreeBase {
 
-    public run(): void {
+
+    public handle(): void {
         this.testTypeOf();
         this.testInstanceOf();
-
     }
-
 
     private testTypeOf(): void {
 

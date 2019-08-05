@@ -1,6 +1,6 @@
 import * as FS from 'fs';
 import { JsonUtil } from './JsonUtil';
-export class JsonBootReader {
+export class JsonReader {
     private jsonConfigPath: string = '';
     private jsonObj: any = null;
 
@@ -12,7 +12,7 @@ export class JsonBootReader {
      * 同步加载方式加载默认配置，
      * @param jsonConfigPath
      */
-    public loadDefaultConfig(jsonConfigPath: string = 'start-config.json'): JsonBootReader {
+    public loadDefaultConfig(jsonConfigPath: string = 'start-config.json'): JsonReader {
         this.jsonConfigPath = jsonConfigPath;
         const data: string = FS.readFileSync(this.jsonConfigPath, { encoding: 'utf8' });
         this.jsonObj = JsonUtil.toNormalJsonObj(JSON.parse(data));
