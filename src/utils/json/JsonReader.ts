@@ -1,7 +1,7 @@
 import * as FS from 'fs';
 import { JsonUtil } from './JsonUtil';
 export class JsonBootReader {
-    private jsonConfigPath: string;
+    private jsonConfigPath: string = '';
     private jsonObj: any = null;
 
     public constructor() {
@@ -24,7 +24,7 @@ export class JsonBootReader {
      * @param jsonConfigPath 玩家自定义配置路径
      */
     public mergeJson(jsonConfigPath: string): void {
-        if (this.jsonConfigPath == null || this.jsonObj == null) {
+        if (this.jsonConfigPath === '' || this.jsonObj === null) {
             this.loadDefaultConfig(jsonConfigPath);
             return;
         }

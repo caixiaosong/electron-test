@@ -21,9 +21,9 @@ export class JsonUtil {
         // tslint:disable-next-line: forin
         for (const key in destJson) {
             const value: any = destJson[key];
-            const valType: string = typeof value;
-            if (valType === 'object') {
-                if (beOverrideJson[key] == null) {
+            const valueType: string = typeof value;
+            if (valueType === 'object') {
+                if (beOverrideJson[key] === null) {
                     beOverrideJson[key] = value; // 直接引用过去，而不是拷贝一份
                 } else {
                     JsonUtil.mergeJson(beOverrideJson[key], value);
