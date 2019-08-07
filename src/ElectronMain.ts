@@ -1,5 +1,5 @@
 import * as Electron from 'electron';
-import { IRunable } from './ifaces/IComFaces';
+import { IRunable } from './common/ifaces/IComFaces';
 
 export class ElectronMain implements IRunable {
     private app: Electron.App;

@@ -1,4 +1,4 @@
-import { IRunable } from "../src/ifaces/IComFaces";
+import { IRunable } from "../src/common/ifaces/IComFaces";
 import { TF_TypeTest } from "./TF_TypeTest";
 import { TF_JsonReader } from "./TF_JsonReader";
 

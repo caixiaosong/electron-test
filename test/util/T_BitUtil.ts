@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { BitUtil } from '../../src/utils/bit/BitUtil';
+import { BitUtil } from '../../src/common/utils/bit/BitUtil';
 
 
 describe('BitUtil', function () {

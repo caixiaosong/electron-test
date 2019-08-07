@@ -2,9 +2,10 @@
   "name": "project-2019",
   "version": "0.0.1",
   "description": "project-2019",
-  "main": "src/main.ts",
+  "main": "src/ElectronMain.ts",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "electron": "electron . --inspect-brk"
   },
   "author": "caixiaosong",
   "license": "ISC",

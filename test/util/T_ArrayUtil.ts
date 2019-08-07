@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { ArrayUtil } from '../../src/utils/array/ArrayUtil';
+import { ArrayUtil } from '../../src/common/utils/array/ArrayUtil';
 
 describe('ArrayUtil', () => {
   let arr: number[];

@@ -176,12 +176,13 @@ export class BitState {
         for (let i: number = 0; i < splitNum; ++i) {
             // tslint:disable-next-line: no-bitwise
             splitValue = value & bitOne;
-            if (i < this.cryptTypeArr.length && this.cryptTypeArr[i] != 0) {
+            if (i < this.cryptTypeArr.length && this.cryptTypeArr[i] !== 0) {
                 // tslint:disable-next-line: no-bitwise
                 splitValue = BitCryptMgr.INSTANCE.cryptValue(splitValue, this.zipBitNum * i, this.zipBitNum * (i + 1), isEncrypt, this.cryptTypeArr[i]) << (i * this.zipBitNum);
                 // tslint:disable-next-line: no-bitwise
                 value = (value & ~bitOne) | splitValue; // (清除数据)|合并数据
             }
+            // tslint:disable-next-line: no-unused-expression
             bitOne << this.zipBitNum;
         }
         return value;

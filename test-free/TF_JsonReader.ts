@@ -1,5 +1,5 @@
-import { ToStrUtil } from "../src/utils/format/ToStrUtil";
-import { JsonReader } from "../src/utils/json/JsonReader";
+import { ToStrUtil } from "../src/common/utils/format/ToStrUtil";
+import { JsonReader } from "../src/common/utils/json/JsonReader";
 import { TestFreeBase } from "../test-free/base/TestFreeBase";
 
 export class TF_JsonReader extends TestFreeBase {
