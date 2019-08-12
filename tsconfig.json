@@ -4,14 +4,19 @@
         "allowJs": true,
         "module": "commonjs",
         "sourceMap": true,
-        "outDir": "out"
+        "outDir": "out",
+        "incremental": true
     },
     "include": [
         "src/**/*.ts",
         "src/**/*.vue",
-        "test-free/*.ts"
+        "test-free/*.ts",
+        "main.ts"
     ],
     "exclude": [
-        "node_modules"
+        ".**",
+        "assert",
+        "node_modules",
+        "out",
     ]
 }

@@ -11,8 +11,15 @@ class TestFree implements IRunable {
         console.log("welcome to test free");
         new TF_TypeTest().run(false);
         new TF_JsonReader().run(true);
+
+        console.log(new TestFree().convertStrVersion("12399-23-4-9"));
     }
 
+
+    private convertStrVersion(v: string) {
+        let a = v.match(/\d+/g)
+        return a.map(i => parseInt(i))
+    }
 }
 
 new TestFree().run();
