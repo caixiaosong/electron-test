@@ -26,16 +26,6 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "main",
-            "program": "${workspaceFolder}/src/main.ts",
-            "preLaunchTask": "tsc: build - tsconfig.json",
-            "outFiles": [
-                "${workspaceFolder}/out/**/*.js"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
             "name": "TestFree",
             "program": "${workspaceFolder}/src/test-free/TestFree.ts",
             "preLaunchTask": "tsc: build - tsconfig.json",

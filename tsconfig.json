@@ -12,8 +12,10 @@
         "src/test-free/**/*.ts"
     ],
     "exclude": [
+        "src/test",
         "assert",
         "node_modules",
         "out",
+        "dist"
     ]
 }
