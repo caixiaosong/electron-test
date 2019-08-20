@@ -5,6 +5,7 @@ node_modules
 out
 dist
 
+**.bak
 //js文件
 **.js
 **.js.map
