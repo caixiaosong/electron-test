@@ -3,6 +3,11 @@ package-lock.json
 
 node_modules
 out
+dist
+
+//js文件
+**.js
+**.js.map
 
 
 

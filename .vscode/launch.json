@@ -7,6 +7,25 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Electron Main",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+            "args": [
+                "${workspaceFolder}/src/main.ts"
+            ],
+            "runtimeArgs": [
+                "--nolazy",
+                "-r",
+                "ts-node/register"
+            ],
+            "sourceMaps": true,
+            "cwd": "${workspaceRoot}",
+            "protocol": "inspector",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "main",
             "program": "${workspaceFolder}/src/main.ts",
             "preLaunchTask": "tsc: build - tsconfig.json",
@@ -18,7 +37,7 @@
             "type": "node",
             "request": "launch",
             "name": "TestFree",
-            "program": "${workspaceFolder}/test-free/TestFree.ts",
+            "program": "${workspaceFolder}/src/test-free/TestFree.ts",
             "preLaunchTask": "tsc: build - tsconfig.json",
             "outFiles": [
                 "${workspaceFolder}/out/**/*.js"

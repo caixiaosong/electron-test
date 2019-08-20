@@ -1,6 +1,6 @@
 import * as Electron from 'electron';
 import * as path from 'path';
-import { IDispose, IRunable } from './src/common/ifaces/IComFaces';
+import { IDispose, IRunable } from './common/ifaces/IComFaces';
 
 class Main implements IRunable, IDispose {
     private app: Electron.App;
@@ -28,24 +28,34 @@ class Main implements IRunable, IDispose {
         });
 
         this.app.on('activate', () => {
-            if (this.mainWindow === null) {
-                this.createWindow();
-            }
+            this.createWindow();
+
         });
     }
+
+
 
     public run(): void {
         this.initApp();
     }
 
     private createWindow() {
+        if (this.mainWindow) {
+            if (this.mainWindow.isMinimizable()) {
+                this.mainWindow.restore();
+                this.mainWindow.focus();
+            }
+            return;
+        }
+
         const windowOptions: Electron.BrowserWindowConstructorOptions = this.getWindowOption();
         if (process.platform === 'linux') {
-            windowOptions.icon = path.join(__dirname, '/assets/app-icon/png/512.png');
+            windowOptions.icon = path.join(__dirname, 'assets/app-icon/png/512.png');
         }
 
         this.mainWindow = new Electron.BrowserWindow(windowOptions);
-        this.mainWindow.loadURL(path.join('file://', __dirname, '/index.html'));
+        const url: string = path.join(__dirname, '../index.html');
+        this.mainWindow.loadURL(url);
         this.mainWindow.on('closed', () => {
             this.dispose();
         });
@@ -53,7 +63,7 @@ class Main implements IRunable, IDispose {
         this.makeSingleInstance();
         const option: Electron.MessageBoxOptions = {
             title: '弹窗标题',
-            message: '弹窗信息'
+            message: this.app.getAppPath() + '\r' + 'url:' + url + '\r' + __dirname
         };
         Electron.dialog.showMessageBox(this.mainWindow, option);
     }

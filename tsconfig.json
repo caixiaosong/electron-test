@@ -9,12 +9,9 @@
     },
     "include": [
         "src/**/*.ts",
-        "src/**/*.vue",
-        "test-free/*.ts",
-        "main.ts"
+        "src/test-free/**/*.ts"
     ],
     "exclude": [
-        ".**",
         "assert",
         "node_modules",
         "out",

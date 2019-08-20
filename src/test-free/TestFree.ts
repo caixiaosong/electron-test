@@ -1,6 +1,7 @@
-import { IRunable } from "../src/common/ifaces/IComFaces";
+import { IRunable } from "../common/ifaces/IComFaces";
 import { TF_TypeTest } from "./TF_TypeTest";
 import { TF_JsonReader } from "./TF_JsonReader";
+
 
 /**
  * 用于自定义测试的入口了。不同于mocha的自动测试，这边希望的是基于vscode可以断点的测试。
@@ -8,7 +9,7 @@ import { TF_JsonReader } from "./TF_JsonReader";
 class TestFree implements IRunable {
 
     public run() {
-        console.log("welcome to test free");
+        console.log('welcome to test free');
         new TF_TypeTest().run(false);
         new TF_JsonReader().run(true);
 
