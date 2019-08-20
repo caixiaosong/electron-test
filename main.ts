@@ -1,6 +1,7 @@
 import * as Electron from 'electron';
+import * as ElectronStore from 'electron-store';
 import * as path from 'path';
-import { IDispose, IRunable } from './common/ifaces/IComFaces';
+import { IDispose, IRunable } from './src/common/ifaces/IComFaces';
 
 class Main implements IRunable, IDispose {
     private app: Electron.App;
@@ -28,44 +29,30 @@ class Main implements IRunable, IDispose {
         });
 
         this.app.on('activate', () => {
-            this.createWindow();
-
+            if (this.mainWindow === null) {
+                this.createWindow();
+            }
         });
     }
-
-
 
     public run(): void {
         this.initApp();
     }
 
     private createWindow() {
-        if (this.mainWindow) {
-            if (this.mainWindow.isMinimizable()) {
-                this.mainWindow.restore();
-                this.mainWindow.focus();
-            }
-            return;
-        }
-
         const windowOptions: Electron.BrowserWindowConstructorOptions = this.getWindowOption();
         if (process.platform === 'linux') {
-            windowOptions.icon = path.join(__dirname, 'assets/app-icon/png/512.png');
+            windowOptions.icon = path.join(__dirname, '/assets/app-icon/png/512.png');
         }
 
         this.mainWindow = new Electron.BrowserWindow(windowOptions);
-        const url: string = path.join(__dirname, '../index.html');
-        this.mainWindow.loadURL(url);
+        this.mainWindow.loadURL(path.join('file://', __dirname, '/index.html'));
         this.mainWindow.on('closed', () => {
             this.dispose();
         });
 
         this.makeSingleInstance();
-        const option: Electron.MessageBoxOptions = {
-            title: '弹窗标题',
-            message: this.app.getAppPath() + '\r' + 'url:' + url + '\r' + __dirname
-        };
-        Electron.dialog.showMessageBox(this.mainWindow, option);
+        this.testElectronStore();
     }
 
     /**
@@ -99,6 +86,21 @@ class Main implements IRunable, IDispose {
             }
         });
     }
+
+    private testElectronStore(): void {
+        // 测试ElctronStore
+        const testKey: string = 'testValue';
+        const store = new ElectronStore({});
+        const value: number = store.get(testKey, 0) as number;
+        store.set(testKey, value + 1);
+
+        const option: Electron.MessageBoxOptions = {
+            title: '弹窗标题',
+            message: '弹窗信息:' + value
+        };
+        Electron.dialog.showMessageBox(this.mainWindow, option);
+    }
 }
 
 new Main().run();
+
