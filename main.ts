@@ -1,4 +1,5 @@
 import * as Electron from 'electron';
+import * as ElectronStore from 'electron-store';
 import * as path from 'path';
 import { IDispose, IRunable } from './src/common/ifaces/IComFaces';
 
@@ -51,11 +52,7 @@ class Main implements IRunable, IDispose {
         });
 
         this.makeSingleInstance();
-        const option: Electron.MessageBoxOptions = {
-            title: '弹窗标题',
-            message: '弹窗信息'
-        };
-        Electron.dialog.showMessageBox(this.mainWindow, option);
+        this.testElectronStore();
     }
 
     /**
@@ -89,6 +86,21 @@ class Main implements IRunable, IDispose {
             }
         });
     }
+
+    private testElectronStore(): void {
+        // 测试ElctronStore
+        const testKey: string = 'testValue';
+        const store = new ElectronStore({});
+        const value: number = store.get(testKey, 0) as number;
+        store.set(testKey, value + 1);
+
+        const option: Electron.MessageBoxOptions = {
+            title: '弹窗标题',
+            message: '弹窗信息:' + value
+        };
+        Electron.dialog.showMessageBox(this.mainWindow, option);
+    }
 }
 
 new Main().run();
+
