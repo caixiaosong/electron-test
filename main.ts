@@ -28,11 +28,6 @@ class Main implements IRunable, IDispose {
             }
         });
 
-        this.app.on('activate', () => {
-            if (this.mainWindow === null) {
-                this.createWindow();
-            }
-        });
     }
 
     public run(): void {
