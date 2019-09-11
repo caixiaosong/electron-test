@@ -1,6 +1,7 @@
 import { IRunable } from "../common/ifaces/IComFaces";
 import { TF_TypeTest } from "./TF_TypeTest";
 import { TF_JsonReader } from "./TF_JsonReader";
+import { TF_PromiseTest } from './TF_Promise';
 
 
 /**
@@ -11,9 +12,10 @@ class TestFree implements IRunable {
     public run() {
         console.log('welcome to test free');
         new TF_TypeTest().run(false);
-        new TF_JsonReader().run(true);
+        new TF_JsonReader().run(false);
+        new TF_PromiseTest().run(true);
 
-        console.log(new TestFree().convertStrVersion("12399-23-4-9"));
+        // console.log(new TestFree().convertStrVersion("12399-23-4-9"));
     }
 
 
